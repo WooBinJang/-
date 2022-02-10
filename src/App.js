@@ -1,13 +1,23 @@
 import { Component } from "react";
-import Counter from "./Counter";
-import EventPractice from "./EventPractice";
-import EventPractice_fnc from "./EventPractice_fnc";
-import Mycomponent from "./Mycomponent";
-import Say from "./Say";
+import ScrollBox from "./ScrollBox";
 
 class App extends Component {
   render() {
-    return <EventPractice_fnc />;
+    return (
+      <div>
+        <ScrollBox ref={(ref) => (this.scrollBox = ref)} />
+        {/* 
+        리액트에서 컴포넌트에도 ref를 달 수 있디.
+        컴포넌트 내부에 있는 DOM을 컴포넌트 외부에서 사용할 뗴 쓴다.
+        */}
+        <button onClick={() => this.scrollBox.scrollToBottom()}>
+          {/* 
+          내부의 메서드 및 멤버 변수에도 접근이 가능하다.
+          */}
+          맨 밑으로
+        </button>
+      </div>
+    );
   }
 }
 export default App;
