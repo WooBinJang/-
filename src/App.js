@@ -1,10 +1,13 @@
 import { Component } from "react";
+import Counter from "./Counter";
+import EventPractice from "./EventPractice";
+import EventPractice_fnc from "./EventPractice_fnc";
 import Mycomponent from "./Mycomponent";
+import Say from "./Say";
 
 class App extends Component {
   render() {
-    const name = "react";
-    return <Mycomponent name={name}>리액트</Mycomponent>;
+    return <EventPractice_fnc />;
   }
 }
 export default App;
