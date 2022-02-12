@@ -2,15 +2,18 @@ import React, { useState } from "react";
 
 const IterationSample = () => {
   const [names, setNames] = useState([
-    { id: 1, text: "눈사람" },
-    { id: 2, text: "얼음" },
-    { id: 3, text: "눈" },
-    { id: 4, text: "바람" },
+    { id: 0, text: "눈사람" },
+    { id: 1, text: "얼음" },
+    { id: 2, text: "눈" },
+    { id: 3, text: "바람" },
+    { id: 4, text: "겨울" },
   ]);
   const [inputText, setInpiutText] = useState("");
   const [nextId, setNextId] = useState(5);
   const nameList = names.map((name) => (
     // 배열 객체의 내장 함수인 map 함수를 사용하여 반복되는 컴포넌트를 렌더링
+    // 불변성 유지가 필요
+    // 상태를 업데이트할 때는 기존 상태를 그대로 두면서 새로운 값을 상태로 설정하는 것 -> 리액트 컴포넌트의 성능을 최적화 할 수 있음
     <li
       key={name.id}
       // 컴포넌트 배열을 렌더링 했을떄 어떤 원소에 변동이 있었는지 알아내려고 사용
@@ -27,6 +30,7 @@ const IterationSample = () => {
 
   const onRemove = (id) => {
     const nextNames = names.filter((name) => name.id !== id);
+    // 배열의 내장 함수 filter 사용(불변성을 유지하면서 배열의 특정 항목을 지울수 있다)
     setNames(nextNames);
   };
 
