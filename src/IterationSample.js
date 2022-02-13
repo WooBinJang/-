@@ -39,7 +39,7 @@ const IterationSample = () => {
   };
   const onClick = () => {
     const nextNames = names.concat({ id: nextId, text: inputText });
-    //concat 새로운 배열 복사 (기본 배열은                                                                                                                                                                                                                                                                                       변경되지 않는다)
+    //concat 새로운 배열 복사 (기본 배열은 유지)                                                                                                                                                                                                                                                                                     변경되지 않는다)
     setNextId(nextId + 1);
     setNames(nextNames);
     setInpiutText("");
