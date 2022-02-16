@@ -26,6 +26,7 @@ const Average = () => {
   const avg = useMemo(() => getAverage(list), [list]);
   // useMemo() : 렌더링하는 과정에서 특정 값(list)이 바뀌었을 때만 연산을 실행
   // 함수형 컴포넌트 내부에서 발생하는 연산을 최적화
+  //useMemo 사용하지 않을경우 input에 값이 바뀔때 마다 함수가 실해되어 성능을 낮춘다.
   return (
     <div>
       <input value={number} onChange={onChange} />
