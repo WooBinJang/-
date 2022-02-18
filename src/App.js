@@ -1,7 +1,5 @@
 import React, { useState } from "react";
-import Average from "./Average";
-import Counter_fnc from "./Counter_fnc";
-import Info from "./Info";
+
 import InfoCustomhook from "./InfoCustomhook";
 
 const App = () => {
@@ -18,8 +16,6 @@ const App = () => {
       </button>
       <hr />
       {visible && <InfoCustomhook />}
-      <Counter_fnc />
-      <Average />
     </div>
   );
 };
