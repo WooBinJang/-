@@ -1,13 +1,122 @@
-body {
+@charset "utf-8";
+/* 초기화 */
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul,
+ol,
+dl {
+  list-style: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+  font-size: 100%;
+}
+
+button {
+  background-color: transparent;
+  text-decoration: none;
+  border: 1px solid #000;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+body {
+  width: 100%;
+  line-height: 1;
+  overflow-x: hidden;
+}
+
+/* 유틸 */
+
+.cf::after {
+  content: "";
+  width: 0;
+  height: 0;
+  font-size: 0;
+  display: block;
+  clear: both;
+}
+
+.blind {
+  display: none;
+}
+
+.inner {
+  width: 1200px;
+  margin: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.warn {
+  color: red;
+  font-size: 12px;
+  padding: 2px;
+}
+
+.trans {
+  color: transparent;
+}
+
+/* 공통클래스 */
+
+.page-title {
+  margin-top: 90px;
+  margin-bottom: 30px;
+  font-size: 25px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 버튼 사용 예시 : 둥근모서리 주황색버튼을 만든다면 클래스명에 btn-r btn-o 추가  */
+.btn-r {
+  /* 둥근버튼 */
+  border-radius: 50px;
+  padding: 5px 10px;
+}
+
+.btn-s {
+  /* 네모버튼 */
+  padding: 5px;
+}
+
+.btn-o {
+  /* 주황색버튼 */
+  color: #fff;
+  background-color: #fba92f;
+  border: none;
+}
+
+.btn-b {
+  /* 검은색버튼 */
+  color: #fff;
+  background-color: #353c44;
+  border: none;
+}
+
+.btn-g {
+  /* 회색버튼 */
+  color: #545147;
+  background-color: #ebebeb;
+  border: none;
+}
+
+.btn-w {
+  /* 흰색버튼 */
+  color: #7b848e;
+  border: 1px solid #7b848e;
 }
