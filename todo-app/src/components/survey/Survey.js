@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Pagination from "./Pagination";
 import "./Survey.css";
 import SurveyRow from "./SurveyRow";
@@ -10,12 +10,14 @@ const Survey = ({
   postsPerPage,
   totalPosts,
   paginate,
+  surveySerachFnc,
 }) => {
   const [surveyModalOpen, surveySetModalOpen] = useState(false);
   const modalClose = () => {
     surveySetModalOpen(!surveyModalOpen);
   };
   const [index, setIndex] = useState(null);
+  const surveyInputRef = useRef();
 
   const checkIndexFnc = (index) => {
     if (index == null) {
@@ -25,8 +27,17 @@ const Survey = ({
       return true;
     }
   };
-  console.log(postsPerPage);
+  /*  */
 
+  const surveyInputEnter = (e) => {
+    if (e.key === "Enter") {
+      surveySerachFnc(surveyInputRef);
+    }
+  };
+  const surveyInputClick = () => {
+    surveySerachFnc(surveyInputRef);
+  };
+  /*  */
   return (
     <div className="survey-box">
       <div className="inner-800">
@@ -53,8 +64,14 @@ const Survey = ({
             </button>
           </div>
           <div className="survey-input-box">
-            <input type="text" className="survey-input" />
-            <button className="survey-input-btn">
+            <input
+              type="text"
+              className="survey-input"
+              placeholder="조사명을 입력해주세요."
+              ref={surveyInputRef}
+              onKeyPress={surveyInputEnter}
+            />
+            <button className="survey-input-btn" onClick={surveyInputClick}>
               <img src="/img/mdi-magnify.png" alt="검색버튼" />
             </button>
           </div>

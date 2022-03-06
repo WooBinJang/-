@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Footer from "./common/Footer";
 import { Route } from "react-router-dom";
 
@@ -6,6 +6,7 @@ import Survey from "./survey/Survey";
 import SurveyDetail from "./survey/SurveyDetail";
 
 const Root = () => {
+  const [posts1, setPosts1] = useState([]);
   const [posts, setPosts] = useState([
     {
       num: 15,
@@ -261,11 +262,27 @@ const Root = () => {
   const indexOfLast = currentPage * postsPerPage;
   const indexOfFirst = indexOfLast - postsPerPage;
 
+  useEffect(() => {
+    const copyPosts = [...posts];
+    setPosts1(copyPosts);
+  }, []);
   function currentPosts(tmp) {
     let currentPosts = 0;
     currentPosts = tmp.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   }
+  console.log(posts1);
+  const surveySerachFnc = (ref) => {
+    return new Promise(function (resolve, reject) {
+      const value = ref.current.value;
+      const searchPosts = [...posts1];
+      const result = searchPosts.filter(
+        (post) => post.surveyName.indexOf(value) !== -1
+      );
+      setPosts(result);
+    });
+  };
+  surveySerachFnc().then(currentPosts(posts));
 
   return (
     <div>
@@ -274,8 +291,9 @@ const Root = () => {
         path="/"
         render={() => (
           <Survey
+            surveySerachFnc={surveySerachFnc}
             totalIndexPosts={posts}
-            posts={currentPosts(posts)}
+            posts={currentPosts(posts)} /* 10개씩 렌더링하는 Post */
             postsPerPage={postsPerPage}
             totalPosts={posts.length}
             paginate={setCurrentPage}
