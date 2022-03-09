@@ -5,8 +5,9 @@ import { Route } from "react-router-dom";
 import Survey from "./survey/Survey";
 import SurveyDetail from "./survey/SurveyDetail";
 
+let defaultPosts = JSON.parse(sessionStorage.getItem("defaultPosts")) || null;
+
 const Root = () => {
-  const [posts1, setPosts1] = useState([]);
   const [posts, setPosts] = useState([
     {
       num: 15,
@@ -263,26 +264,34 @@ const Root = () => {
   const indexOfFirst = indexOfLast - postsPerPage;
 
   useEffect(() => {
-    const copyPosts = [...posts];
-    setPosts1(copyPosts);
+    defaultPosts = posts;
   }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("defaultPosts", JSON.stringify(defaultPosts));
+  }, [posts]);
+
   function currentPosts(tmp) {
     let currentPosts = 0;
     currentPosts = tmp.slice(indexOfFirst, indexOfLast);
     return currentPosts;
   }
-  console.log(posts1);
   const surveySerachFnc = (ref) => {
     return new Promise(function (resolve, reject) {
       const value = ref.current.value;
-      const searchPosts = [...posts1];
-      const result = searchPosts.filter(
+      const result = defaultPosts.filter(
         (post) => post.surveyName.indexOf(value) !== -1
       );
       setPosts(result);
     });
   };
-  surveySerachFnc().then(currentPosts(posts));
+  surveySerachFnc()
+    .then(() => {
+      currentPosts(posts);
+    })
+    .then(() => {
+      setCurrentPage(1);
+    });
 
   return (
     <div>
@@ -292,7 +301,7 @@ const Root = () => {
         render={() => (
           <Survey
             surveySerachFnc={surveySerachFnc}
-            totalIndexPosts={posts}
+            totalIndexPosts={defaultPosts}
             posts={currentPosts(posts)} /* 10개씩 렌더링하는 Post */
             postsPerPage={postsPerPage}
             totalPosts={posts.length}

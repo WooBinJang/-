@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import "./Pagination.css";
 const Pagination = ({ postsPerPage, totalPosts, paginate, setIndex }) => {
   const [currenntIndex, setCurrenntIndex] = useState(1);
   const pageNumbers = [];
+  const indxRef = useRef();
+
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i++) {
     pageNumbers.push(i);
   }
@@ -27,6 +29,10 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, setIndex }) => {
   }
   plusCurrenntIndex().then(paginate(currenntIndex));
 
+  const colorChgFnc = (ref) => {
+    console.log("ASd");
+    ref.current.style.color = "##fba92f";
+  };
   return (
     <div>
       <nav>
@@ -43,9 +49,12 @@ const Pagination = ({ postsPerPage, totalPosts, paginate, setIndex }) => {
           {pageNumbers.map((number) => (
             <li key={number} className="pagination-item">
               <span
+                ref={indxRef}
                 onClick={() => {
                   paginate(number);
                   setCurrenntIndex(number);
+                  colorChgFnc(indxRef);
+
                   setIndex(null);
                 }}
               >
